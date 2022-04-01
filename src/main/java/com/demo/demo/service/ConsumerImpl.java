@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CalculateImpl implements Calculate {
+public class ConsumerImpl implements Consumer {
 
   private final Deque<TimeAndNumberPair> values = new ArrayDeque<>();
   private final int minutesInterval = 5;
