@@ -1,6 +1,6 @@
 package com.demo.demo;
 
-import com.demo.demo.service.Calculate;
+import com.demo.demo.service.Consumer;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +14,7 @@ import java.util.Random;
 @AllArgsConstructor
 public class DemoApplication {
 
-  private final Calculate calculate;
+  private final Consumer consumer;
 
   public static void main(String[] args) {
     SpringApplication.run(DemoApplication.class, args);
@@ -23,12 +23,12 @@ public class DemoApplication {
   @Scheduled(fixedDelay = 1000)
   public void callAccept() {
     int randomisedInt = new Random().nextInt(10000);
-    calculate.accept(randomisedInt);
+    consumer.accept(randomisedInt);
   }
 
   @Scheduled(fixedDelay = 1000)
   public double callMean() {
-    double average = calculate.mean();
+    double average = consumer.mean();
     System.out.println("Average: " + average);
     return average;
   }

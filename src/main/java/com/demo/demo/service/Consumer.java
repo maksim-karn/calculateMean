@@ -1,6 +1,6 @@
 package com.demo.demo.service;
 
-public interface Calculate {
+public interface Consumer {
   void accept(int number);
 
   double mean();
