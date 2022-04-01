@@ -8,3 +8,5 @@ But the problem was storing ever-increasing numbers.
 When calculating the average, I did not divide each number by the amount in order to reduce memory costs.
 `getAverage()` method uses `long` for storing sum. This is enough to add the maximum numbers int.
 Dividing each number by the total would take more CPU time.
+---------
+JS implementation based on `setTimeout()` func. Code locates in **JS** folder
