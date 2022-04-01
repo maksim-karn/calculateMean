@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <script>
+        const NUMBER_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+        class Consumer {
+            _avg = 0;
+            _count = 0;
+
+            /**
+             * Called periodically to consume an integer.
+             */
+            accept(number) {
+                this._avg = (this._avg * this._count + number) / (this._count + 1);
+                this._count++;
+
+                console.log(`Added ${number} to average. New average: ${this._avg}`);
+
+                setTimeout(() => {
+                    this._count--;
+
+                    if (this._count === 0) {
+                        this._avg = 0;
+                    } else {
+                        this._avg = (this._avg * (this._count + 1) - number) / this._count;
+                    }
+
+                    console.log(`Removed ${number} from average. New average: ${this._avg}`);
+                }, NUMBER_TTL_MS)
+            }
+
+            /**
+             * Returns the mean (aka average) of numbers consumed in the
+             * last 5 minute period.
+             */
+            mean() {
+                return this._avg;
+            }
+        }
+
+        const c = new Consumer();
+
+        const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        (async function () {
+            c.accept(1)
+            await delay(1000);
+            c.accept(2)
+            await delay(1000);
+            c.accept(3)
+            await delay(1000);
+            c.accept(4)
+            await delay(1000);
+            c.accept(5)
+            await delay(1000);
+            c.accept(6)
+        })()
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>
