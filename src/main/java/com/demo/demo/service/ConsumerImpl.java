@@ -17,10 +17,12 @@ public class ConsumerImpl implements Consumer {
   private final Deque<TimeAndNumberPair> values = new ArrayDeque<>();
   private final int minutesInterval = 5;
 
+  @Override
   public void accept(int number) {
     values.addFirst(new TimeAndNumberPair(LocalDateTime.now(), number));
   }
 
+  @Override
   public double mean() {
     List<Integer> numbers = new ArrayList<>();
     LocalDateTime timeEnd = LocalDateTime.now().minusMinutes(minutesInterval);
